@@ -1,0 +1,211 @@
+%
+% latex-sample.tex
+%
+% This LaTeX source file provides a template for a typical research paper.
+%
+
+%
+% Use the standard article template.
+%
+\documentclass{article}
+
+% The geometry package allows for easy page formatting.
+\usepackage{geometry}
+\geometry{letterpaper}
+
+% Load up special logo commands.
+\usepackage{doc}
+
+% make a reference to Hypertext 
+\usepackage{hyperref}
+
+% Package for formatting URLs.
+\usepackage{url}
+
+% Packages and definitions for graphics files.
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 'dirname #1'/'basename #1 .tif'.png}
+
+%
+% Set the title, author, and date.
+%
+\title{Movie Review Metrics vs Box Office Gross Values\\ \small{DNSC 6211: Programming for Analytics}}
+\author{
+	Abhinav Chandel \\
+	Tingting Ju \\
+	Xinyi Wang \\
+	Yunning Zhu \\
+	Daniel Chen \\
+}
+\date{}
+
+%
+% The document proper.
+%
+\begin{document}
+
+% Add the title section.
+\maketitle
+
+% Add an abstract.
+\abstract{
+Describe your project within 200 words.  One way is answer the following questions regarding your project: (a) what did you do? (b) why did you choose do that? (c) how did you go about doing your project (d) what did you find out?, and finally (e) What did you find out? The content of your abstract and the outline and contents of your report may vary according to the needs of your specific research topic.
+}
+
+% Add various lists on new pages.
+\pagebreak
+\tableofcontents
+
+
+% Start the paper on a new page.
+\pagebreak
+
+%
+% Body text.
+%
+\section{Introduction}
+\label{introduction}
+
+For full-time graduate students, going to the movies is perhaps the most available and low-cost pastime option.  We often check movie ratings on popular review sites such as Rotten Tomato, IMDB, Metacritic, etc.  to help us to decide whether or not we should go to see a particular movie.  Therefore, it is natural to expect that higher-rated movies are likely to generate more moviegoers, and consequently, more box office successes.  But is that truly the case?
+
+We decided to conduct our project by examining the relationship between movie review metrics and box office gross values.  More specifically, we decided to look at all the movie reviews from 2015 and see if the top-rated ones actually ended up being the top 100 grossing movies of 2015.  The problem we identified is:  How much predictive power does movie review metrics have over box office success (in terms of both worldwide and domestic revenues)?
+
+\section{Background}
+
+The expected storyline would be something like: “Rotten Tomato Tomatometer ratings are good predictors of box office gross values.” or “Metacritic ratings are not good predictors of box office gross values.” Or “The combination of Rotten Tomato Tomatometer and Metacritic ratings has the best predictive power of box office gross values.”  The underlying data sources that drive our storyline would be as follows:
+
+\begin{enumerate}
+	\item	Revenue-Related Data:
+	\begin{enumerate}
+ 		\item	Box Office Mojo
+ 	\end{enumerate}
+	\item	Budget-Related Data:
+ 	\begin{enumerate}
+ 		\item	The Numbers – Movie Budget
+ 	\end{enumerate}
+	\item	Review-Related Data:
+ 	\begin{enumerate}
+ 		\item	Rotten Tomato: ratings by audience
+ 		\item	IMDB:  ratings by audience
+ 		\item	Metacritic:  ratings by critics
+ 		\item	Twitter:  commentaries from general populace
+ 	\end{enumerate}
+\end{enumerate}
+
+Most of the data could be obtained via web-scrapping.  Data from Twitter and/or Facebook would require the use of API.  And they would have to be further cleaned for “quality metrics” that include feelings and satisfaction ratings, which would then be translated into sentiment scores.  After cleaning up all the datasets, we would like to load all of them into a central database via SQL.
+
+\section{Method}
+Our proposed methodology is as follows:
+
+\begin{enumerate}
+	\item Data Gathering:  Scrap revenue and review data off web in Python
+	\item Data Transformation:  Create sentiment scores in Python; normalize and standardize rating scores in Python
+	\item Data Cleansing:  Ensure clean DataFrames that can easily be output into csv files
+	\item Data Consolidation:  Load all datasets into one database via MySQL
+	\item Analysis:  Build simple linear regressions / multiple regressions in R
+	\item Presentation:  Display results via visualization (ggplot and matplotlib) and interactive web applications (shiny)
+\end{enumerate}
+
+There are some foreseeable concerns:
+
+\begin{itemize}
+	\item Sentiment Analysis:  Facebook was initially identified as one of our data sources.  However, we may have to abandon this data source due to our inexperience with Facebook’s API.
+	\item Time Constraint:  Our project scope is ambitious with numerous data sources.  We fear that we will not have ample time to complete our project.
+	\item Regression Results:  What if none of our regression models turns out to be statistically significant?
+\end{itemize}
+
+\section{Organization}
+
+Our division of labor is fluid – we will shift the workloads around the team to fit our individual schedules as we go through the project.  Currently, our division of labor is as follows: 
+
+\begin{itemize}
+	\item Abhinav:  Project idea formulation, web scrapping (ratings), sentiment scores
+	\item Yunning:  Project idea formulation, web scrapping (ratings), sentiment scores
+	\item Xinyi:  Project idea formulation, web scrapping (ratings), sentiment scores
+	\item TingTing:  Project idea formulation, web scrapping (misc.), initial data consolidation and regression
+	\item Daniel:  Project idea formulation, web scrapping (revenues), report/presentation slide write-ups
+\end{itemize}
+
+\subsection{Workflow}
+
+Provide a diagram of the workflow for your project. The command to include a diagram is shown below. Make sure you \underline{remove the comment} and \underline{change the name of the graphic file} without extension. Also, instead of \textbf{Quick Build} choose \textbf{PDFLaTex} from the dropdown option. Then generate the pdf with \textbf{View PDF}.
+
+\begin{figure}
+  \centering
+	\includegraphics[scale=0.3]{workflow}
+  \caption{Our projected workflow}
+\end{figure}
+
+Please explain your workflow diagram in this space. Limit this to 250 words.
+
+\subsection{Project structure}
+
+Describe your data sources. In addition, describe how they are related to each other and to the research question(s). Limit this to 250 words.
+
+\subsection{Figures and Tables}
+
+List your tables and figures and explain why you chose to use them. Explain how these tables and / or figures contribute to your "story." Limit this to 250 words.
+
+\section{Discussion}
+
+This section requires you to discuss your experience. Describe the value of your project. What are two main "selling points" of your project. Limit this to 150 words.
+
+\subsection{Learnings}
+
+Discuss some of your "better moments" in this projects - the ones you enjoyed. Also describe. what you learned in this project. Limit to 150 words
+
+\subsection{Challenges}
+
+Discuss some of your "difficult moments" in completing this project. You may want to write about things you wanted to do but could not complete and why. Limit to 150 words.
+
+\section{Bullets and numbered lists (FYI, delete in your report)}
+
+This is up to you. If you want to add another section. This section explains how to make lists. In you final report you should delete this part. 
+
+\subsection{Bulleted and Numbered Lists}
+
+\LaTeX\ is very good at providing clean lists.  Examples are shown below.
+
+\begin{itemize}
+\item Bulleted items come out properly indented and spaced, every time.
+
+\begin{itemize}
+\item Sub-bullets are a virtual no-brainer: just nest another \verb!itemize! block.
+\item Note how the bullet character automatically changes too.
+\end{itemize}
+
+\item Just keep on adding \verb!\item!s\ldots
+
+\item \ldots until you're done.
+\end{itemize}
+
+Numbered lists are almost identical, except that you specify \verb!enumerate! instead of \verb!itemize!.  List items are specified in exactly the same way (thus making it easy to change list types).
+
+\begin{enumerate}
+\item A list item
+\item Another list item
+\item A list item with multiple nested lists
+
+\begin{itemize}
+\item Nested lists can be of mixed types.
+\item That's a lot of power and flexibility for the price of learning a handful of directives.
+
+\begin{enumerate}
+\item Like nested bullet lists, nested numbered lists also ``intelligently'' change their numbering schemes.
+\item Meanwhile, all \emph{you} have to write is \verb!\item!.  \LaTeX\ does the rest.
+\end{enumerate}
+\end{itemize}
+
+\item Back to your regularly scheduled list item
+
+\end{enumerate}
+
+BTW, this is a great site to generate tables in Latex and learn how to do it in Latex -- \url{http://www.tablesgenerator.com/}
+
+\section{Conclusion}
+
+Wrap up your paper with an executive summary of the paper itself, reiterating its subject and its major points. Limit this to 150 words.
+
+\end{document}
+
